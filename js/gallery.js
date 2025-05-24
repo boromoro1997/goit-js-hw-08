@@ -81,6 +81,12 @@ galary.innerHTML = galleryMaker(images);
 galary.addEventListener("click", galaryModalOpener);
 function galaryModalOpener(event) {
     event.preventDefault();
+    function escapeCloser(event) {
+        if (event.key === "Escape") {
+            instance.close();
+            console.log(event.key);
+        } 
+    }
     if (event.target === galary) {
         return;
     }
@@ -88,9 +94,19 @@ function galaryModalOpener(event) {
     const instance = basicLightbox.create(`
         <div class="modal">
         <img src="${event.target.dataset.source}"/>
-        </div> `)
+        </div> `,
+        {
+            onShow: () => {
+                document.addEventListener("keydown", escapeCloser);
+            },
+            onClose: () => {
+                document.removeEventListener("keydown", escapeCloser);
+            }
+        }
+    )
     instance.show();
     const modal = document.querySelector(".modal");
     modal.addEventListener("click", () => instance.close());
 }
+
 console.log(window);
