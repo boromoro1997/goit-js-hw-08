@@ -90,5 +90,7 @@ function galaryModalOpener(event) {
         <img src="${event.target.dataset.source}"/>
         </div> `)
     instance.show();
+    const modal = document.querySelector(".modal");
+    modal.addEventListener("click", () => instance.close());
 }
 console.log(window);
