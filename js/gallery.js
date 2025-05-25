@@ -63,7 +63,7 @@ const images = [
       description: 'Lighthouse Coast Sea',
     },
 ];
-const galary = document.querySelector(".gallery")
+const gallery = document.querySelector(".gallery")
 
 function galleryMaker(arr) {
     return arr.map(({preview,description,original})=>`<li class="gallery-item">
@@ -77,17 +77,17 @@ function galleryMaker(arr) {
   </a>
 </li>`).join("")
 }
-galary.innerHTML = galleryMaker(images);
-galary.addEventListener("click", galaryModalOpener);
-function galaryModalOpener(event) {
+function escapeCloser(event) {
+  if (event.key === "Escape") {
+      instance.close();
+      console.log(event.key);
+  } 
+gallery.innerHTML = galleryMaker(images);
+gallery.addEventListener("click", galleryModalOpener);
+function galleryModalOpener(event) {
     event.preventDefault();
-    function escapeCloser(event) {
-        if (event.key === "Escape") {
-            instance.close();
-            console.log(event.key);
-        } 
     }
-    if (event.target === galary) {
+    if (event.target.nodeName!=="IMG") {
         return;
     }
     console.log(event.target.dataset.source);
