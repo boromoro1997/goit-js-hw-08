@@ -85,35 +85,31 @@ gallery.addEventListener("click", galleryModalOpener);
 //   } 
 // }
 function galleryModalOpener(event) {
-    event.preventDefault();
+  event.preventDefault();
+  const escapeCloser =(e) => {
+    if (e.key === "Escape") {
+      instance.close();
+    }
+  }
     if (event.target.nodeName!=="IMG") {
         return;
     }
-    console.log(event.target.dataset.source);
-    const instance = basicLightbox.create(`
-        <div class="modal">
-        <img src="${event.target.dataset.source}"/>
-        </div> `,
-        {
-            onShow: () => {
-            document.addEventListener("keydown", (e) => {
-              if (e.key === "Escape") {
-                instance.close();
-              }
-            });
-            },
-            onClose: () => {
-              document.removeEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
-                  instance.close();
-                }
-              });
-            }
-        }
-    )
+   const instance = basicLightbox.create(`
+    <div class="modal">
+    <img src="${event.target.dataset.source}"/>
+    </div> `,
+    {
+      onShow: () => {
+      document.addEventListener("keydown", escapeCloser);
+      },
+      onClose: () => {
+      document.removeEventListener("keydown", escapeCloser);
+      }
+    }
+  )
     instance.show();
     const modal = document.querySelector(".modal");
     modal.addEventListener("click", () => instance.close());
 }
 
-console.log(window);
+
