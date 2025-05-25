@@ -77,16 +77,15 @@ function galleryMaker(arr) {
   </a>
 </li>`).join("")
 }
-function escapeCloser(event) {
-  if (event.key === "Escape") {
-      instance.close();
-      console.log(event.key);
-  } 
 gallery.innerHTML = galleryMaker(images);
 gallery.addEventListener("click", galleryModalOpener);
+// function escapeCloser(event) {
+//   if (event.key === "Escape") {
+//       instance.close();
+//   } 
+// }
 function galleryModalOpener(event) {
     event.preventDefault();
-    }
     if (event.target.nodeName!=="IMG") {
         return;
     }
@@ -97,10 +96,10 @@ function galleryModalOpener(event) {
         </div> `,
         {
             onShow: () => {
-                document.addEventListener("keydown", escapeCloser);
+                document.addEventListener("keydown", (e)=>{if(e.key === "Escape"){instance.close();}});
             },
             onClose: () => {
-                document.removeEventListener("keydown", escapeCloser);
+                document.removeEventListener("keydown", (e)=>{if(e.key === "Escape"){instance.close();}});
             }
         }
     )
