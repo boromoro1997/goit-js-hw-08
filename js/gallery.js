@@ -96,10 +96,18 @@ function galleryModalOpener(event) {
         </div> `,
         {
             onShow: () => {
-                document.addEventListener("keydown", (e)=>{if(e.key === "Escape"){instance.close();}});
+            document.addEventListener("keydown", (e) => {
+              if (e.key === "Escape") {
+                instance.close();
+              }
+            });
             },
             onClose: () => {
-                document.removeEventListener("keydown", (e)=>{if(e.key === "Escape"){instance.close();}});
+              document.removeEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                  instance.close();
+                }
+              });
             }
         }
     )
